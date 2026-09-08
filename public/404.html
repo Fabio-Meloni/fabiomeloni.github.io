@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fabio Meloni</title>
+    <script>
+      var path = location.pathname + location.search + location.hash;
+      sessionStorage.setItem("spa-redirect", path);
+      location.replace(location.origin + "/");
+    </script>
+  </head>
+  <body></body>
+</html>
