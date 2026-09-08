@@ -1,0 +1,161 @@
+/* Sticky header containing the back-navigation control. */
+.breadcrumb {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 16px 56px;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.back-btn:hover,
+.back-btn:focus-visible {
+  border-color: var(--primary);
+  color: var(--primary-text);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.content {
+  max-width: 800px;
+  padding: 40px 56px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /*
+   * The sticky breadcrumb occupies space above the scroll flow without
+   * reserving room for itself; this offset prevents anchor-scrolling to
+   * this element from placing its content behind the breadcrumb.
+   */
+  scroll-margin-top: 84px;
+}
+
+.tag-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(58, 123, 255, 0.1);
+  color: var(--primary-text);
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin: 0;
+}
+
+.short-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: -12px 0 0;
+}
+
+/* Content block (description, stack), each independently scroll-targetable via the chapter navigation. */
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-margin-top: 84px;
+}
+
+.block-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.block-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-md);
+  background: rgba(58, 123, 255, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block-icon-secondary {
+  background: rgba(127, 91, 255, 0.12);
+  color: var(--secondary);
+}
+
+.block-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.description-text {
+  border-left: 3px solid var(--primary);
+  padding-left: 16px;
+}
+
+.stack-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stack-chip {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.not-found {
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+@media (max-width: 640px) {
+  .breadcrumb {
+    padding: 16px 24px;
+  }
+  .content {
+    padding: 32px 24px 56px;
+  }
+}

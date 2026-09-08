@@ -1,0 +1,105 @@
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  color: inherit;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-card);
+}
+
+/* Decorative icon banner. */
+.card-header {
+  height: 96px;
+  background: linear-gradient(135deg, rgba(58, 123, 255, 0.25), rgba(127, 91, 255, 0.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon {
+  font-size: 28px;
+  color: var(--primary);
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.card-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+}
+
+.tag-list,
+.stack-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(58, 123, 255, 0.1);
+  color: var(--primary-text);
+}
+
+.stack-chip {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* Overflow-count chip, shown when the stack exceeds the displayed limit. */
+.stack-chip-more {
+  color: var(--primary-text);
+  border-color: rgba(58, 123, 255, 0.3);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-card:hover {
+    transform: translateY(-2px);
+  }
+}

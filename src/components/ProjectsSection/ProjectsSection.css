@@ -1,0 +1,41 @@
+.projects {
+  padding: 56px;
+  border-bottom: 1px solid var(--border);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/*
+ * Placeholder entry, visually distinguished from .project-card by a
+ * dashed border and the absence of interactive affordances, to be
+ * legible as a forthcoming addition rather than a clickable project.
+ */
+.project-card-wip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 220px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--border-strong);
+  color: var(--muted);
+  text-align: center;
+}
+
+.project-card-wip p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .projects {
+    padding: 40px 24px;
+  }
+}

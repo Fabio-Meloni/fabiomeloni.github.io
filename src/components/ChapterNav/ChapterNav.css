@@ -1,0 +1,169 @@
+/* Panel positioning context; width transitions between expanded and collapsed states. */
+.chapter-nav-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+  width: 220px;
+  transition: width var(--transition-base);
+}
+
+.chapter-nav-wrapper.collapsed {
+  width: 56px;
+}
+
+/* Scrollable panel content container. */
+.chapter-nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 14px;
+  background: var(--card);
+  border-left: 1px solid var(--border);
+  transition: padding var(--transition-base);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.chapter-nav.collapsed {
+  padding: 20px 8px;
+  align-items: center;
+}
+
+/* Expand/collapse control. */
+.toggle-btn {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.chapter-nav.collapsed .toggle-btn {
+  align-self: center;
+}
+
+.toggle-btn:hover,
+.toggle-btn:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+/* Section link list. */
+.chapter-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.chapter-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.chapter-nav.collapsed .chapter-link {
+  padding: 8px;
+  justify-content: center;
+}
+
+.chapter-link:hover,
+.chapter-link:focus-visible {
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+/* Applied to the section currently in view (see ChapterNav.vue's scroll tracking). */
+.chapter-link.active {
+  color: var(--primary-text);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.chapter-icon {
+  flex-shrink: 0;
+}
+
+.chapter-nav.collapsed .label {
+  display: none;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* Theme and locale toggle controls. */
+.nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+
+.chapter-nav.collapsed .nav-actions {
+  align-items: center;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 12px;
+  font-weight: 600;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.chapter-nav.collapsed .action-btn {
+  width: 34px;
+  padding: 0;
+  justify-content: center;
+}
+
+.action-btn:hover,
+.action-btn:focus-visible {
+  border-color: var(--primary);
+  color: var(--primary-text);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.lang-code {
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+/* Hidden below the width at which the layout cannot accommodate both content and this panel. */
+@media (max-width: 900px) {
+  .chapter-nav-wrapper {
+    display: none;
+  }
+}

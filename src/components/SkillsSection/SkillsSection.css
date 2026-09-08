@@ -1,0 +1,108 @@
+.skills {
+  padding: 56px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Technology tile grid. */
+.skill-grid {
+  list-style: none;
+  margin: 0 0 40px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px;
+}
+
+.skill-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+/* --skill-color is set per-item from data.js; falls back to the theme accent where unset. */
+.skill-tile:hover,
+.skill-tile:focus-within {
+  border-color: var(--skill-color, var(--primary));
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--skill-color, var(--primary)) 20%, transparent);
+}
+
+.skill-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.skill-name {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.group-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Interest pill list. */
+.interest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.interest-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 7px 14px 7px 7px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+/* --interest-color is set per-item from data.js; falls back to the theme accent where unset. */
+.interest-pill:hover,
+.interest-pill:focus-within {
+  border-color: var(--interest-color, var(--primary));
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--interest-color, var(--primary)) 20%, transparent);
+}
+
+.interest-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-md);
+  color: var(--interest-color, var(--primary));
+  background: color-mix(in srgb, var(--interest-color, var(--primary)) 18%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skill-tile:hover,
+  .interest-pill:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 640px) {
+  .skills {
+    padding: 40px 24px;
+  }
+}

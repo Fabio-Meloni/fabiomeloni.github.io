@@ -1,0 +1,62 @@
+/* Shared base styling for both cursor elements: fixed positioning, circular geometry, non-intercepting of pointer events. */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.cursor-dot.is-visible,
+.cursor-ring.is-visible {
+  opacity: 1;
+}
+
+/* Inner dot, tracking the pointer position directly. */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--primary);
+}
+
+.cursor-dot.is-pressed {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+}
+
+/* Outer ring, trailing the pointer position with easing (see CustomCursor.vue). */
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1.5px solid var(--primary);
+  background: transparent;
+}
+
+/* Applied while hovering an interactive element. */
+.cursor-ring.is-active {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 12%, transparent);
+}
+
+.cursor-ring.is-pressed {
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring {
+    transition: opacity 0.2s ease;
+  }
+}

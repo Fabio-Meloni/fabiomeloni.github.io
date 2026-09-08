@@ -1,0 +1,32 @@
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+/* Label chip preceding the title. */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-text);
+  background: rgba(58, 123, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Fills the remaining horizontal space. */
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}

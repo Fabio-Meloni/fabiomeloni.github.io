@@ -1,0 +1,130 @@
+.timeline {
+  padding: 56px;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 24px;
+}
+
+/* Connecting line to the following entry. */
+.timeline-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 18px;
+  bottom: -24px;
+  width: 1px;
+  background: var(--border);
+}
+
+/* --type-color is set per-entry in TimelineSection.vue, based on the entry's type. */
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--type-color, var(--primary));
+}
+
+.timeline-card {
+  display: block;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: inherit;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.timeline-card.is-clickable {
+  cursor: pointer;
+}
+
+.timeline-card:hover {
+  border-color: var(--type-color, var(--primary));
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--type-color, var(--primary)) 15%, transparent);
+}
+
+.timeline-card.is-clickable:focus-visible {
+  border-color: var(--type-color, var(--primary));
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--type-color, var(--primary)) 15%, transparent);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.grade-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--success-text);
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-text);
+  background: rgba(58, 123, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* Indicates that an entry links to an associated thesis. */
+.thesis-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary-text);
+}
+
+.institution {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 2px;
+}
+
+.role {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    padding: 40px 24px;
+  }
+}

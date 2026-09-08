@@ -1,0 +1,99 @@
+/**
+ * Design-token declarations. Defines the light theme as the default
+ * custom-property set on `:root`, with a dark-theme override applied
+ * either via the `prefers-color-scheme` media feature or an explicit
+ * `data-theme` attribute (see `src/composables/useTheme.js`).
+ */
+
+:root {
+  /* Surface colors. */
+  --background: #f5f6f7;
+  --card: #e8eaed;
+
+  /*
+   * Primary text color. Satisfies the WCAG AAA contrast requirement
+   * (7:1, plus a margin) against --card, the more restrictive of the two
+   * surfaces. --muted is assigned an identical value: at this contrast
+   * floor, no value lighter than --foreground can independently satisfy
+   * the same requirement, so the two properties converge by necessity.
+   */
+  --foreground: #474c52;
+
+  /* Brand accent colors, used for non-text purposes (backgrounds, icons, decorative elements). */
+  --primary: #3a7bff;
+  --secondary: #7f5bff;
+
+  --border: rgba(74, 79, 85, 0.15);
+  --border-strong: rgba(74, 79, 85, 0.25);
+  --muted: #474c52;
+  --success: #22c55e;
+
+  /*
+   * Text-safe variants of the accent colors above, darkened to the same
+   * hue until satisfying WCAG AAA (7:1, plus a margin) as small text
+   * against --card. Reserved for text usage; --primary/--secondary/
+   * --success remain the canonical values for non-text contexts, to
+   * which the AAA text-contrast criterion does not apply.
+   */
+  --primary-text: #003ebd;
+  --secondary-text: #3500f2;
+  --success-text: #0f572a;
+
+  /*
+   * Button-background variants, held constant across themes. A white
+   * button label requires a sufficiently dark background regardless of
+   * the active theme, whereas --primary-text/--secondary-text lighten
+   * under the dark theme to remain legible as text on a dark surface —
+   * an inverse requirement.
+   */
+  --primary-btn: #003ebd;
+  --secondary-btn: #3500f2;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  --shadow-card: 0 12px 32px rgba(58, 123, 255, 0.12);
+  --shadow-card-soft: 0 4px 20px rgba(58, 123, 255, 0.1);
+
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+}
+
+/*
+ * Dark-theme override, applied via the system color-scheme preference.
+ * Takes effect only in the absence of an explicit light-theme selection;
+ * it is superseded by the explicit `[data-theme="dark"]` selector below
+ * once a theme preference (default or user-selected) has been applied
+ * by useTheme.js. Prior to that point, this rule governs only the
+ * initial pre-JavaScript paint.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0f1114;
+    --card: #1a1d21;
+    --foreground: #d1d5da;
+    --border: rgba(209, 213, 218, 0.1);
+    --border-strong: rgba(209, 213, 218, 0.2);
+    --muted: #a1aab4;
+    --primary-text: #7da8ff;
+    --secondary-text: #b09aff;
+    --success-text: #21c25c;
+  }
+}
+
+/* Dark-theme override, applied explicitly via the `data-theme` attribute. */
+:root[data-theme="dark"] {
+  --background: #0f1114;
+  --card: #1a1d21;
+  --foreground: #d1d5da;
+  --border: rgba(209, 213, 218, 0.1);
+  --border-strong: rgba(209, 213, 218, 0.2);
+  --muted: #a1aab4;
+  --primary-text: #7da8ff;
+  --secondary-text: #b09aff;
+  --success-text: #21c25c;
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fabio Meloni</title>
+    <meta name="description" content="Portfolio personale di Fabio: progetti, percorso di studi ed esperienza." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem("spa-redirect");
+        if (redirect) {
+          sessionStorage.removeItem("spa-redirect");
+          if (redirect !== location.pathname + location.search + location.hash) {
+            window.history.replaceState(null, "", redirect);
+          }
+        }
+      })();
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

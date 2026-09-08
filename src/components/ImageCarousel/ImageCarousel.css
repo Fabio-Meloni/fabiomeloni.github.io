@@ -1,0 +1,188 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Media display area. */
+.viewport {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.slide-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+/* Displayed in the absence of real media. */
+.slide-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Previous/next and zoom controls, overlaid on the viewport. */
+.nav-btn,
+.zoom-btn {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.nav-btn:hover,
+.nav-btn:focus-visible,
+.zoom-btn:hover,
+.zoom-btn:focus-visible {
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.nav-btn {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-prev {
+  left: 12px;
+}
+.nav-next {
+  right: 12px;
+}
+
+.zoom-btn {
+  top: 12px;
+  right: 12px;
+}
+
+/* Slide-selection indicators. */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 4px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--border-strong);
+  padding: 0;
+  transition: width var(--transition-fast), background var(--transition-fast);
+}
+
+.dot:hover,
+.dot:focus-visible {
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.dot.is-active {
+  width: 20px;
+  background: var(--primary);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+/* Full-screen overlay presenting the current slide at larger scale. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox-media {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.lightbox-nav:hover,
+.lightbox-nav:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+.lightbox-next {
+  right: 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox {
+    animation: lightbox-fade 0.15s ease;
+  }
+}
+
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

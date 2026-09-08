@@ -1,0 +1,429 @@
+/* Sidebar positioning context, fixed width, full viewport height. */
+.sidebar-wrapper {
+  width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+/* Scrollable sidebar content container. */
+.sidebar {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  transition: background var(--transition-base);
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Static printer housing illustration; the avatar photograph is composited into its front window. */
+.printer {
+  position: relative;
+  width: 355px;
+  height: 380px;
+  margin: 0 -61.5px 12px;
+}
+
+.printer-body-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--muted);
+}
+
+/*
+ * Print-head travel path: begins at rest (top-right), descends to
+ * begin the first layer, sweeps each horizontal layer bottom-to-top in
+ * a single direction (right-to-left, per a raster-scan pattern; see
+ * printAnimationCss for the generated per-layer keyframes), and
+ * returns to its resting position upon completion.
+ */
+.print-head {
+  position: absolute;
+  top: 4px;
+  left: 85%;
+  width: 26px;
+  transform: translateX(-50%);
+  opacity: 0;
+  z-index: 2;
+  animation: printhead-travel 3.4s linear 0.2s both;
+}
+
+.print-head-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.2));
+}
+
+.ph-cable {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+.ph-housing {
+  fill: url(#ph-housing-grad);
+  stroke: var(--border-strong);
+  stroke-width: 1.2;
+}
+
+.ph-fan-ring {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.ph-fan-blade {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  transform-origin: 15px 10px;
+  animation: fan-spin 0.7s linear infinite;
+}
+
+.ph-fins {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1.2;
+}
+
+.ph-block {
+  fill: var(--muted);
+}
+
+.ph-nozzle {
+  fill: #000;
+  animation: ph-glow-fade 3.4s linear 0.2s both;
+}
+
+.ph-glow {
+  fill: var(--primary);
+  filter: drop-shadow(0 0 3px var(--primary));
+  animation: ph-glow-fade 3.4s linear 0.2s both;
+}
+
+@keyframes fan-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*
+ * Bottom-anchored to align with the printer bed (the lower edge of the
+ * housing illustration's front window), rather than vertically centered.
+ * The clip-path applied here (see @keyframes avatar-print-reveal, generated
+ * in printAnimationCss) covers the ring's border together with its content,
+ * preventing the unprinted region from being visible through either.
+ */
+.avatar-ring {
+  position: absolute;
+  /* Expressed in absolute pixels rather than percentages: .printer's
+     non-square aspect ratio (355×380) would otherwise cause a percentage
+     value to scale against two different bases, yielding an ellipse. */
+  bottom: 117.24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 148.8px;
+  height: 148.8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  padding: 3px;
+  clip-path: inset(100% 0 0 0);
+  animation: avatar-print-reveal 3.4s linear 0.2s both;
+}
+
+/*
+ * Circular halo positioned behind the avatar ring, revealed via an
+ * expanding circular clip synchronized to the same interval as the
+ * photograph's own reveal (see printAnimationCss).
+ */
+.avatar-glow {
+  position: absolute;
+  bottom: 117.24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 148.8px;
+  height: 148.8px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--primary) 30%, transparent),
+    0 0 40px color-mix(in srgb, var(--secondary) 15%, transparent);
+  clip-path: circle(0px at 50% 50%);
+  animation: avatar-halo-reveal 3.4s linear 0.9s both;
+}
+
+.avatar-mask {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--card);
+}
+
+/* Fallback initials, displayed in place of a photograph. */
+.avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+  text-align: center;
+}
+
+.role {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 4px 0 0;
+  text-align: center;
+}
+
+/* Academic affiliation badge. */
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--background);
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--border));
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.badge-degree {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.badge-institution {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.group {
+  margin-bottom: 28px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Social-profile link list. */
+.social-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--foreground) 12%, transparent);
+  color: var(--foreground);
+}
+
+/* LinkedIn brand-color override. */
+.social-icon-linkedin {
+  background: color-mix(in srgb, #0a66c2 18%, transparent);
+  color: #0a66c2;
+}
+
+.social-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.social-arrow {
+  color: var(--muted);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-row:hover,
+.social-row:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.social-row:hover .social-arrow,
+.social-row:focus-visible .social-arrow {
+  color: var(--primary);
+  transform: translate(2px, -2px);
+}
+
+/*
+ * State applied to interactive elements pending future activation
+ * (e.g. the LinkedIn link, CV download, and contact card). Rendered as
+ * visually dimmed and non-interactive, in place of removal, so that
+ * reactivation requires only removing this class and the corresponding
+ * `disabled`/`aria-disabled` attributes from the markup.
+ */
+.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 10px 12px;
+  margin-top: 12px;
+  color: var(--foreground);
+  font-size: 12px;
+  text-align: left;
+  transition: border-color var(--transition-fast);
+}
+
+.contact-card:hover,
+.contact-card:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.contact-card:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.contact-icon-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+}
+
+.contact-email {
+  flex: 1;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.copy-feedback {
+  min-height: 14px;
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--success-text);
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.cv-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: var(--radius-lg);
+  /*
+   * Uses the fixed button-safe gradient variants rather than
+   * --primary/--secondary (insufficient contrast for a white label) or
+   * --primary-text/--secondary-text (which lighten under the dark theme
+   * for legibility as text on a dark surface — the inverse requirement
+   * of a background beneath white text).
+   */
+  background: linear-gradient(135deg, var(--primary-btn), var(--secondary-btn));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity var(--transition-base), transform var(--transition-fast);
+}
+
+.cv-btn:hover,
+.cv-btn:focus-visible {
+  opacity: 0.88;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .social-row:hover {
+    transform: translateX(2px);
+  }
+  .cv-btn:hover {
+    transform: translateY(-1px);
+  }
+}

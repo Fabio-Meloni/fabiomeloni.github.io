@@ -1,0 +1,37 @@
+/* Positioning context for the primary scroll container and its overlaid custom scrollbar. */
+.main-content-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Primary scroll container, shared across all routes. */
+.main-content {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Route transition: fade combined with vertical translation. */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+}

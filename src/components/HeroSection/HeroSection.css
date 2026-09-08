@@ -1,0 +1,143 @@
+.hero {
+  padding: 72px 56px;
+  border-bottom: 1px solid var(--border);
+  max-width: 760px;
+}
+
+/* Availability status indicator. */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-lg);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: var(--success-text);
+  margin-bottom: 24px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+}
+
+/* Gradient-clipped headline text. */
+.headline {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0 0 24px;
+  background: linear-gradient(135deg, var(--foreground), var(--primary-text));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.bio p {
+  margin: 0;
+}
+
+/*
+ * Accent styling for inline <span> elements authored directly within
+ * the biography HTML in data.js (trusted, non-user-supplied content),
+ * matching the headline gradient and call-to-action palette.
+ */
+.bio :deep(.accent-primary) {
+  color: var(--primary-text);
+  font-weight: 600;
+}
+
+.bio :deep(.accent-secondary) {
+  color: var(--secondary-text);
+  font-weight: 600;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cta-primary,
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform var(--transition-fast), opacity var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.cta-primary {
+  border: none;
+  /*
+   * Uses the fixed button-safe gradient variants rather than
+   * --primary/--secondary (insufficient contrast for a white label) or
+   * --primary-text/--secondary-text (which lighten under the dark theme
+   * for legibility as text on a dark surface — the inverse requirement
+   * of a background beneath white text).
+   */
+  background: linear-gradient(135deg, var(--primary-btn), var(--secondary-btn));
+  color: #fff;
+}
+
+.cta-secondary {
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
+}
+
+.cta-primary:hover,
+.cta-primary:focus-visible {
+  opacity: 0.92;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.cta-secondary:hover,
+.cta-secondary:focus-visible {
+  border-color: var(--primary);
+  color: var(--primary-text);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cta-primary:hover,
+  .cta-secondary:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/*
+ * State applied to interactive elements pending future activation.
+ * Rendered as visually dimmed and non-interactive, in place of removal,
+ * so that reactivation requires only removing this class and the
+ * corresponding `disabled`/`aria-disabled` attributes from the markup.
+ */
+.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 48px 24px;
+  }
+}

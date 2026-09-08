@@ -1,0 +1,114 @@
+/**
+ * Global stylesheet. Establishes the box-sizing model, base typography
+ * and color scheme, and cross-cutting behavioral rules (custom cursor,
+ * text-selection theming, scrollbar suppression, focus indication,
+ * scroll-triggered fade-in, and reduced-motion accommodation).
+ */
+
+@import "./tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+#app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/*
+ * Suppresses the native cursor once CustomCursor.vue has confirmed, at
+ * mount time, that a fine pointing device is present. Touch-only devices
+ * never receive this class and retain default cursor behavior.
+ */
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none !important;
+}
+
+/* Text-selection color, aligned with the application's accent palette rather than the user agent default. */
+::selection {
+  background: color-mix(in srgb, var(--primary) 35%, transparent);
+  color: var(--foreground);
+}
+::-moz-selection {
+  background: color-mix(in srgb, var(--primary) 35%, transparent);
+  color: var(--foreground);
+}
+
+/*
+ * Suppresses the native scrollbar globally. Scroll containers are
+ * instead paired with CustomScrollbar.vue, a DOM-based thumb capable of
+ * being tracked by the custom cursor — unlike a native scrollbar drag,
+ * which does not dispatch document-level "mousemove" events.
+ */
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Keyboard-navigation focus indicator, applied uniformly across interactive elements. */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Scroll-triggered entrance transition, toggled by the useInView composable. */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced-motion accommodation: collapses animation and transition durations and disables smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
