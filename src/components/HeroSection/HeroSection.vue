@@ -35,7 +35,7 @@ function scrollToProjects() {
     </div>
 
     <div class="cta-row">
-      <a class="cta-primary is-disabled" aria-disabled="true" tabindex="-1">
+      <a class="cta-primary" :href="`mailto:${profile.email}`">
         <Mail :size="16" aria-hidden="true" />
         {{ t("hero.ctaContact") }}
       </a>

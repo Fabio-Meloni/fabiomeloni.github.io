@@ -352,7 +352,7 @@ async function copyEmail() {
       <button
         type="button"
         class="contact-card"
-        disabled
+        @click="copyEmail"
         :aria-label="t('sidebar.copyEmail', { email: EMAIL })"
       >
         <span class="contact-icon-chip" aria-hidden="true">
