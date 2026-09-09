@@ -4,7 +4,7 @@
   three placeholder slides is displayed.
 -->
 <script setup>
-import { ref, computed, onBeforeUnmount, watch } from "vue";
+import { ref, computed, onBeforeUnmount, watch, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
 import { ChevronLeft, ChevronRight, ZoomIn, X } from "@lucide/vue";
 
@@ -53,11 +53,41 @@ const placeholderGradients = [
  * corresponding full-resolution asset to display.
  */
 const lightboxOpen = ref(false);
+const slideVideoEl = ref(null);
+const lightboxVideoEl = ref(null);
+
+/**
+ * Opens the lightbox, handing off video playback from the inline slide
+ * player to the lightbox one at the same point in time so the "zoomed"
+ * view continues seamlessly rather than restarting from the beginning.
+ */
 function openLightbox() {
-  if (hasRealImages.value) lightboxOpen.value = true;
+  if (!hasRealImages.value) return;
+  const el = slideVideoEl.value;
+  const time = el?.currentTime ?? 0;
+  const playing = el ? !el.paused : true;
+  el?.pause();
+  lightboxOpen.value = true;
+  nextTick(() => {
+    const lb = lightboxVideoEl.value;
+    if (!lb) return;
+    lb.currentTime = time;
+    if (playing) lb.play();
+  });
 }
+
+/** Closes the lightbox, handing video playback back to the inline slide player at the same point in time. */
 function closeLightbox() {
+  const lb = lightboxVideoEl.value;
+  const time = lb?.currentTime ?? 0;
+  const playing = lb ? !lb.paused : true;
   lightboxOpen.value = false;
+  nextTick(() => {
+    const el = slideVideoEl.value;
+    if (!el) return;
+    el.currentTime = time;
+    if (playing) el.play();
+  });
 }
 
 /**
@@ -92,10 +122,13 @@ onBeforeUnmount(() => {
     <div class="viewport">
       <video
         v-if="currentIsVideo"
+        ref="slideVideoEl"
         :key="images[index]"
         :src="images[index]"
         class="slide-media"
         controls
+        autoplay
+        muted
         playsinline
         preload="metadata"
         :aria-label="t('carousel.imageAlt', { alt, current: index + 1, total })"
@@ -158,11 +191,13 @@ onBeforeUnmount(() => {
 
         <video
           v-if="currentIsVideo"
+          ref="lightboxVideoEl"
           :key="images[index]"
           :src="images[index]"
           class="lightbox-media"
           controls
           autoplay
+          muted
           playsinline
           :aria-label="t('carousel.imageAlt', { alt, current: index + 1, total })"
         />
