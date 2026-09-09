@@ -76,6 +76,27 @@
   margin: -12px 0 0;
 }
 
+.thesis-link {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--primary-text);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.thesis-link:hover,
+.thesis-link:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
 /* Content block (description, stack), each independently scroll-targetable via the chapter navigation. */
 .block {
   display: flex;

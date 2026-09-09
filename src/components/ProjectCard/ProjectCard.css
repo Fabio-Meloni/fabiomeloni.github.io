@@ -29,6 +29,12 @@
   color: var(--primary);
 }
 
+.card-icon-img {
+  height: 64px;
+  width: 64px;
+  object-fit: contain;
+}
+
 .card-body {
   padding: 20px;
   display: flex;

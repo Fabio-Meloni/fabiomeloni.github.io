@@ -5,7 +5,6 @@
 <script setup>
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import { Construction } from "@lucide/vue";
 import SectionHeading from "../SectionHeading/SectionHeading.vue";
 import ProjectCard from "../ProjectCard/ProjectCard.vue";
 import { getContent } from "../../data.js";
@@ -30,11 +29,6 @@ const { target, isVisible } = useInView();
         :project="project"
         :icon="icons[index % icons.length]"
       />
-
-      <div class="project-card-wip">
-        <Construction :size="28" aria-hidden="true" />
-        <p>{{ t("projects.comingSoon") }}</p>
-      </div>
     </div>
   </section>
 </template>

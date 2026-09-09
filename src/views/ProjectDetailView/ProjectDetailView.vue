@@ -7,7 +7,7 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { ArrowLeft, PenLine, Layers } from "@lucide/vue";
+import { ArrowLeft, PenLine, Layers, GraduationCap } from "@lucide/vue";
 import { getContent } from "../../data.js";
 import { getTagIcon } from "../../utils/tagIcons.js";
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel.vue";
@@ -46,7 +46,16 @@ function goBack() {
       <h1 class="title">{{ project.title }}</h1>
       <p class="short-desc">{{ project.shortDescription }}</p>
 
-      <ImageCarousel :images="project.images" :alt="project.title" />
+      <router-link
+        v-if="project.thesisSlug"
+        :to="{ name: 'thesis-detail', params: { slug: project.thesisSlug } }"
+        class="thesis-link"
+      >
+        <GraduationCap :size="15" aria-hidden="true" />
+        {{ t("projectDetail.viewThesis") }}
+      </router-link>
+
+      <ImageCarousel v-if="project.images?.length" :images="project.images" :alt="project.title" />
 
       <section id="project-description" class="block">
         <h2 class="block-title">

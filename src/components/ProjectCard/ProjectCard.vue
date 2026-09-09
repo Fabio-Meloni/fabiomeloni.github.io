@@ -19,7 +19,19 @@ const props = defineProps({
 <template>
   <router-link :to="{ name: 'project-detail', params: { id: project.id } }" class="project-card">
     <div class="card-header">
-      <span class="card-icon" aria-hidden="true">{{ icon }}</span>
+      <img
+        v-if="project.icon"
+        :src="project.icon"
+        alt=""
+        class="card-icon-img"
+        aria-hidden="true"
+        :style="
+          project.icon_size
+            ? { width: `${project.icon_size.width}px`, height: `${project.icon_size.height}px` }
+            : undefined
+        "
+      />
+      <span v-else class="card-icon" aria-hidden="true">{{ icon }}</span>
     </div>
 
     <div class="card-body">

@@ -68,7 +68,6 @@ export default {
     viewDetails: "Vedi dettagli",
     tagListLabel: "Categorie del progetto",
     stackListLabel: "Stack tecnologico",
-    comingSoon: "Altri progetti in arrivo",
   },
   projectDetail: {
     back: "Home",
@@ -79,6 +78,7 @@ export default {
     stackListLabel: "Stack tecnologico completo",
     notFound: "Progetto non trovato.",
     backToPortfolio: "Torna al portfolio",
+    viewThesis: "Scopri di più nella tesi di laurea",
   },
   thesisDetail: {
     back: "Home",

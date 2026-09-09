@@ -68,7 +68,6 @@ export default {
     viewDetails: "View details",
     tagListLabel: "Project categories",
     stackListLabel: "Tech stack",
-    comingSoon: "More projects coming soon",
   },
   projectDetail: {
     back: "Home",
@@ -79,6 +78,7 @@ export default {
     stackListLabel: "Full tech stack",
     notFound: "Project not found.",
     backToPortfolio: "Back to portfolio",
+    viewThesis: "Read more in the Bachelor's thesis",
   },
   thesisDetail: {
     back: "Home",
