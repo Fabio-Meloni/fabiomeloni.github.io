@@ -212,7 +212,7 @@ const contentIt = {
     name: "Fabio Meloni",
     role: "Full Stack Developer",
     university: { degree: "Laurea in Informatica", institution: "Università di Parma" },
-    email: "",
+    email: "info@fabiomeloni.net",
     bio: [
       "Sono laureato in Informatica presso l'<span class=\"accent-primary\">Università di Parma</span> con <span class=\"accent-secondary\">110/110 e lode</span>. Il mio percorso accademico si colloca all'intersezione tra ingegneria del software e intelligenza artificiale, ambiti nei quali ho maturato competenze sia metodologiche che operative. Attualmente sono iscritto alla laurea magistrale in Scienze Informatiche, con un curriculum focalizzato su verifica del software e tecniche avanzate di <span class=\"accent-primary\">intelligenza artificiale</span>.",
       "Parallelamente agli studi, ho progettato e sviluppato un <span class=\"accent-primary\">software gestionale per la stampa 3D</span>, orientato all'automazione delle catene di produzione e alla gestione coordinata di sistemi di stampa additiva. Collaboro inoltre alla realizzazione di un <span class=\"accent-secondary\">CMS per dati biologici</span>, pensato come alternativa ai CMS tradizionali nel settore bioinformatico: la piattaforma integra modelli di intelligenza artificiale per l'importazione dei dati, l'esecuzione di algoritmi di analisi e la generazione di interfacce di consultazione dei dataset.",
@@ -532,7 +532,7 @@ const contentEn = {
     name: "Fabio Meloni",
     role: "Full Stack Developer",
     university: { degree: "B.Sc. in Computer Science", institution: "University of Parma, Italy" },
-    email: "",
+    email: "info@fabiomeloni.net",
     bio: [
       "I hold a Bachelor's degree in Computer Science from the <span class=\"accent-primary\">University of Parma</span>, graduating with full marks and honors (<span class=\"accent-secondary\">110/110 cum laude</span>). My academic path sits at the intersection of software engineering and artificial intelligence, fields in which I've built both methodological and hands-on expertise. I'm currently enrolled in the Master's degree in Computer Science, with a curriculum focused on software verification and advanced <span class=\"accent-primary\">artificial intelligence</span> techniques.",
       "Alongside my studies, I designed and developed <span class=\"accent-primary\">management software for 3D printing</span>, aimed at automating production chains and coordinating additive manufacturing systems. I also contribute to a <span class=\"accent-secondary\">CMS for biological data</span>, conceived as an alternative to traditional CMS platforms in the bioinformatics field: the platform integrates AI models to support data import, execution of analysis algorithms, and generation of dataset browsing interfaces.",
