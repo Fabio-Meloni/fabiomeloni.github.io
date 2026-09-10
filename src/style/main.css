@@ -112,3 +112,15 @@ img {
     transform: none;
   }
 }
+
+@media (min-width: 901px) {
+  .iubenda-tp-btn:not(.iubenda-floatable-tb-btn)[data-tp-float][data-tp-float="bottom-right"]:not(
+      [data-tp-nostyle]
+    ) {
+    right: 14px !important;
+    bottom: 104px !important;
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--foreground) !important;
+  }
+}
