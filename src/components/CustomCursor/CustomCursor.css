@@ -6,7 +6,8 @@
   left: 0;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  /* Max stacking value: keeps the cursor above third-party overlays. */
+  z-index: 2147483647;
   opacity: 0;
   transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }

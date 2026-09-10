@@ -15,6 +15,17 @@
   color: var(--muted);
 }
 
+/* Privacy/cookie policy links. */
+.legal-links {
+  display: flex;
+  gap: 12px;
+}
+
+.legal-links .legal-link:not(.iubenda-black),
+.legal-links .legal-link.iubenda-black {
+  color: var(--success-text) !important;
+}
+
 @media (max-width: 640px) {
   .footer {
     padding: 32px 24px;
